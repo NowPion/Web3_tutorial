@@ -10,4 +10,17 @@ contract HelloWorldFactory{
         hw = new HelloWorld();
         hws.push(hw);
     }
+
+    function getHelloWorldByIndex(uint256 _index) public view  returns (HelloWorld){
+        return hws[_index];
+    }
+
+    function sayHelloWorldByIndex(uint256 _index,uint256 _id) public view returns (string memory){
+        return hws[_index].sayHello(_id);
+    }
+
+    function setHelloByIndex(uint256 _index,string memory newString,uint256 _id) public {
+        hws[_index].setHello(newString,_id);
+    }
+
 }
