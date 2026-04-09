@@ -5,7 +5,9 @@ import { HelloWorld } from "./HelloWorld.sol";
 
 contract HelloWorldFactory{
     HelloWorld hw;
+    HelloWorld[] hws;
     function createHelloWorld() public {
-
+        hw = new HelloWorld();
+        hws.push(hw);
     }
 }
