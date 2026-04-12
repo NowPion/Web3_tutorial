@@ -1,14 +1,27 @@
-# SimpleVoting Vue 前端
+# Web3 Frontend Hub（Vue）
 
-一个基于 Vue 3 + Vite + ethers.js 的投票系统前端。
+这是一个可扩展的 Web3 前端工程：**一个仓库管理多个合约前端页面**。
 
-## 功能
+## 已有页面
 
-- 连接 MetaMask 钱包
-- 输入并连接 `SimpleVoting` 合约地址
-- 读取提案列表和票数
-- 对提案投票（同一地址同一提案只能投一次）
-- 管理员账户可创建提案
+- `SimpleVoting`：连接钱包、创建提案、投票、事件订阅
+- `MyToken ERC20`：查询总供应量/余额，`transfer`，`approve`，`allowance`，`transferFrom`
+
+## 目录结构
+
+```text
+src/
+  router/
+    index.js                 # 路由入口
+  views/
+    HomeView.vue             # 首页（项目导航）
+  projects/
+    registry.js              # 项目注册表（新增项目改这里）
+    simple-voting/
+      SimpleVotingPage.vue   # SimpleVoting 页面
+  App.vue                    # 应用壳层（导航 + RouterView）
+  main.js                    # 应用启动入口
+```
 
 ## 启动
 
@@ -17,16 +30,22 @@ npm install
 npm run dev
 ```
 
-打开控制台给出的本地地址（通常是 `http://localhost:5173`）。
+## 如何新增一个合约前端页面
 
-## 使用步骤
+1. 在 `src/projects/` 下新建目录，例如 `token-bank/`。
+2. 新建页面组件，例如 `TokenBankPage.vue`。
+3. 在 `src/projects/registry.js` 里注册：
+   - `id`
+   - `title`
+   - `description`
+   - `path`
+   - `component: () => import('...')`
 
-1. 在钱包中切换到你部署合约的网络。
-2. 点击“连接钱包”。
-3. 输入部署后的 `SimpleVoting` 合约地址，点击“连接合约”。
-4. 即可查看提案、投票；若当前账户是管理员，可创建提案。
+完成后首页和导航会自动出现入口。
 
-## 说明
+## 当前技术栈
 
-- 合约 ABI 在 `src/App.vue` 内写死为当前教程合约接口。
-- 合约地址会保存在浏览器 `localStorage` 中。
+- Vue 3
+- Vite
+- vue-router 4
+- ethers.js
